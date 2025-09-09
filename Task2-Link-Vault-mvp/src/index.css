@@ -1,0 +1,15 @@
+body{
+  background-image: url('/background/background.png');
+  /* background-color: rgba(158, 220, 241, 0.46); */
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  margin: 0;
+  padding-inline: 116px;
+  height: 100vh;                  
+  width: 100vw;                   
+  background-repeat: no-repeat; 
+  background-size: 100% 100%;     
+  background-position: center;
+}

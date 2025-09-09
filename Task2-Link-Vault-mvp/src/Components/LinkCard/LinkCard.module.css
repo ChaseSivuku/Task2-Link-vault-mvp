@@ -1,0 +1,97 @@
+.card{
+    /* border: solid black 1px; */
+    border-radius: 20px;
+    width: 250px;
+    padding: 15px;
+    background-color: white;
+    color: rgb(22, 62, 72);
+}
+
+.title{
+    font-size: 24px;
+    /* border: solid red 1px; */
+    margin: 10px 0 auto auto;
+}
+
+hr{
+    border: solid rgb(183, 183, 183) 0.4px;
+}
+
+.infoDiv{
+    display: flex;
+    margin-top: 0;
+    /* border: solid blue 1px; */
+    gap: 5px;
+}
+
+.descriptionDiv{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    /* border: solid black 1px; */
+    padding-top: 0;
+    align-items: start;
+}
+
+.descriptionDiv p{
+    margin: 0
+}
+
+.tagsDiv{
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.tagsDiv p{
+    font-size: 12px;
+    border: solid 1px;
+    padding: 5px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.tagsDiv p:hover{
+    background-color: rgb(231, 231, 231);
+}
+
+.descriptionText{
+    font-size: 12px;
+}
+
+.iconsDiv{
+    /* border: solid red 1px; */
+    width: fit-content;
+}
+
+.iconsDiv ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    /* border: solid green 1px; */
+    padding: 0 0 20px 0;
+    margin-top: 0;
+}
+
+.iconsDiv ul li{
+    /* border: solid blue 1px; */
+    padding: 0;
+    height: 13px;
+    width: 13px;
+}
+
+.iconsDiv ul li img{
+    height: 100%;
+    width: 100%;
+}
+
+.showMoreButton{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+
