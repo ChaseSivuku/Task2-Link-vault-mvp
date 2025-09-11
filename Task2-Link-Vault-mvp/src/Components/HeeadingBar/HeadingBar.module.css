@@ -1,6 +1,6 @@
 .container{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     background-color: rgb(22, 62, 72);
     color: white;
     width: 1040px;
@@ -11,4 +11,5 @@
     font-weight: 50;
     font-style: normal;
     align-items: center;
-}
+    padding-inline: 20px;
+} 

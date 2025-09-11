@@ -1,6 +1,7 @@
 .container{
     background-color: white;
     width: 170px;
+    max-height: 60px;
     border-radius: 5px;
     transition-duration: 400ms;
 }

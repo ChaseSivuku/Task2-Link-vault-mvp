@@ -1,0 +1,33 @@
+.container{
+    display: flex;
+    background-color: white ;
+    width: 194px;
+    height: 30px;
+    padding: 4px 2px 4px 2px;
+}
+
+.search{
+    width: 80%;
+    border: 0;
+    border-right: solid rgb(128, 128, 128, 0.4) 0.5px;
+}
+
+.search:focus{
+    outline: none;
+}
+
+.buttonContainer{
+    width: 20%;
+}
+
+.buttonContainer button{
+    background: none;
+    border: none;
+    height: 100%;
+    width: 100%;
+}
+
+.buttonContainer button:hover{
+    background-color: rgb(241, 236, 236);
+    transition-duration: 600ms;
+}
