@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./LinkCard.module.css";
 
 type Props = {
+  url: string
   title: string;
   description: string;
   tags?: string[];
@@ -29,6 +30,7 @@ export const LinkCard: React.FC<Props> = ({ title, description, tags }) => {
                 <img src="/icons/edit.png" alt="" />
               </li>
               <li>
+                
                 <img src="/icons/delete.png" alt="" />
               </li>
               <li>
