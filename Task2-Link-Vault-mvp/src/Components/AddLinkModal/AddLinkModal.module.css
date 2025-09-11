@@ -4,14 +4,14 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.6); /* semi-transparent background */
+  background: rgba(0, 0, 0, 0.6); 
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* ensure it’s on top of everything */
+  z-index: 1000; 
 }
 
-/* Modal box */
+
 .modal {
   background: #fff;
   border-radius: 12px;
@@ -22,7 +22,6 @@
   animation: fadeIn 0.3s ease-out;
 }
 
-/* Modal heading */
 .modal h2 {
   margin-top: 0;
   margin-bottom: 1rem;
@@ -30,7 +29,6 @@
   text-align: center;
 }
 
-/* Input fields */
 .modal input,
 .modal textarea {
   width: 100%;
@@ -41,7 +39,7 @@
   font-size: 1rem;
 }
 
-/* Buttons row */
+
 .buttons {
   display: flex;
   justify-content: flex-end;

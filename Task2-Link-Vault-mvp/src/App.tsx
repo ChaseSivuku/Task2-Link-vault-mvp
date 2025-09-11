@@ -16,7 +16,6 @@ function App() {
 
   const API_URL = "http://localhost:5000/links";
 
-  // ✅ Load links from JSON server or fallback to localStorage
   useEffect(() => {
     fetch(API_URL)
       .then((res) => {
@@ -30,10 +29,9 @@ function App() {
       });
   }, []);
 
-  // ✅ Add or update link
   const handleSave = async (link: LinkData) => {
     if (editLink) {
-      // Editing existing link
+  
       try {
         const res = await fetch(`${API_URL}/${editLink.id}`, {
           method: "PUT",
@@ -47,7 +45,7 @@ function App() {
           prev.map((l) => (l.id === editLink.id ? updated : l))
         );
       } catch {
-        // fallback localStorage
+
         const updated = links.map((l) =>
           l.id === editLink.id ? { ...link, id: editLink.id } : l
         );
@@ -76,7 +74,7 @@ function App() {
     }
   };
 
-  // ✅ Delete link
+
   const handleDelete = async (id: number) => {
     try {
       await fetch(`${API_URL}/${id}`, { method: "DELETE" });
@@ -88,7 +86,7 @@ function App() {
     }
   };
 
-  // ✅ Edit link (open modal pre-filled)
+  // ✅ Edit link
   const handleEdit = (id: number) => {
     const link = links.find((l) => l.id === id);
     if (link) {
