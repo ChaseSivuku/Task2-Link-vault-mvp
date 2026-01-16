@@ -1,23 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./AddLinkModal.module.css";
 
 type Props = {
   onClose: () => void;
   onSave: (link: LinkData) => void;
+  initialData?: LinkData | null;
 };
 
 export type LinkData = {
-  id?: number;
+  id?: number | string;
   title: string;
   description: string;
   hashtags: string[];
   url: string;
 };
 
-export const AddLinkModal: React.FC<Props> = ({ onClose, onSave }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [url, setUrl] = useState("");
+export const AddLinkModal: React.FC<Props> = ({ onClose, onSave, initialData }) => {
+  const [title, setTitle] = useState(initialData?.title || "");
+  const [description, setDescription] = useState(initialData?.description || "");
+  const [url, setUrl] = useState(initialData?.url || "");
+
+  // Update form when initialData changes (for editing)
+  useEffect(() => {
+    if (initialData) {
+      setTitle(initialData.title);
+      setDescription(initialData.description);
+      setUrl(initialData.url);
+    } else {
+      // Reset form when adding new link
+      setTitle("");
+      setDescription("");
+      setUrl("");
+    }
+  }, [initialData]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,14 +42,27 @@ export const AddLinkModal: React.FC<Props> = ({ onClose, onSave }) => {
       .filter((word) => word.startsWith("#"))
       .map((tag) => tag.replace("#", ""));
 
-    onSave({ title, description, hashtags, url });
+    const linkData: LinkData = {
+      ...(initialData?.id && { id: initialData.id }),
+      title,
+      description,
+      hashtags,
+      url,
+    };
+
+    onSave(linkData);
+    
+    // Reset form
+    setTitle("");
+    setDescription("");
+    setUrl("");
     onClose();
   };
 
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        <h2>Add New Link</h2>
+        <h2>{initialData ? "Edit Link" : "Add New Link"}</h2>
         <form onSubmit={handleSubmit}>
           <input
             type="text"

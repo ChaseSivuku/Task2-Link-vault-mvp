@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./LinkCard.module.css";
 
 type Props = {
-  id?: number;
+  id?: number | string;
   url: string;
   title: string;
   description: string;
   hashtags: string[]; 
-  onEdit?: (id: number) => void;
-  onDelete?: (id: number) => void;
+  onEdit?: (id: number | string) => void;
+  onDelete?: (id: number | string) => void;
 };
+
+const MAX_DESCRIPTION_LENGTH = 100;
 
 export const LinkCard: React.FC<Props> = ({
   id,
@@ -20,19 +22,32 @@ export const LinkCard: React.FC<Props> = ({
   onEdit,
   onDelete,
 }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const shouldTruncate = description.length > MAX_DESCRIPTION_LENGTH;
+  const displayDescription = isExpanded || !shouldTruncate 
+    ? description 
+    : `${description.substring(0, MAX_DESCRIPTION_LENGTH)}...`;
+
   return (
     <div className={styles.card}>
       <h3 className={styles.title}>{title}</h3>
       <hr />
       <div className={styles.infoDiv}>
         <div className={styles.descriptionDiv}>
-          <p className={styles.descriptionText}>{description}</p>
+          <p className={styles.descriptionText}>{displayDescription}</p>
           <div className={styles.tagsDiv}>
             {hashtags.map((hashtag, index) => (
               <p key={index}>#{hashtag}</p>
             ))}
           </div>
-          <button className={styles.showMoreButton}>show more...</button>
+          {shouldTruncate && (
+            <button 
+              className={styles.showMoreButton}
+              onClick={() => setIsExpanded(!isExpanded)}
+            >
+              {isExpanded ? "show less..." : "show more..."}
+            </button>
+          )}
         </div>
 
         <div className={styles.iconsDiv}>
