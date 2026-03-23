@@ -1,95 +1,142 @@
 .card{
-    /* border: solid black 1px; */
-    border-radius: 20px;
-    width: 250px;
-    padding: 15px;
-    background-color: white;
-    color: rgb(22, 62, 72);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  padding: 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
 }
 
 .title{
-    font-size: 24px;
-    /* border: solid red 1px; */
-    margin: 10px 0 auto auto;
+  font-size: 0.98rem;
+  font-weight: 800;
+  margin: 0 0 8px 0;
 }
 
-hr{
-    border: solid rgb(183, 183, 183) 0.4px;
+.card hr{
+  border: none;
+  border-top: 1px solid rgba(15, 50, 58, 0.12);
+  margin: 8px 0 10px;
 }
 
 .infoDiv{
-    display: flex;
-    margin-top: 0;
-    /* border: solid blue 1px; */
-    gap: 5px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
 }
 
 .descriptionDiv{
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    /* border: solid black 1px; */
-    padding-top: 0;
-    align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  flex: 1;
 }
 
 .descriptionDiv p{
-    margin: 0
-}
-
-.tagsDiv{
-    display: flex;
-    gap: 5px;
-    margin-top: 5px;
-}
-
-.tagsDiv p{
-    font-size: 12px;
-    border: solid 1px;
-    padding: 5px;
-    border-radius: 25px;
-    cursor: pointer;
-}
-
-.tagsDiv p:hover{
-    background-color: rgb(231, 231, 231);
+  margin: 0;
 }
 
 .descriptionText{
-    font-size: 12px;
+  font-size: 0.88rem;
+  line-height: 1.3;
+  color: var(--text);
 }
 
-.iconsDiv{
-    /* border: solid red 1px; */
-    width: fit-content;
+.tagsDiv{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 1px;
 }
 
-.iconsDiv ul{
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    /* border: solid green 1px; */
-    padding: 0 0 20px 0;
-    margin-top: 0;
-}
-
-.iconsDiv ul li{
-    /* border: solid blue 1px; */
-    padding: 0;
-    height: 13px;
-    width: 13px;
-}
-
-.iconsDiv ul li img{
-    height: 100%;
-    width: 100%;
+.tagsDiv p{
+  font-size: 11px;
+  border: 1px solid rgba(22, 62, 72, 0.16);
+  padding: 4px 8px;
+  border-radius: 999px;
+  cursor: default;
+  color: rgba(15, 50, 58, 0.85);
+  background: rgba(22, 62, 72, 0.06);
 }
 
 .showMoreButton{
-    background: none;
-    border: none;
-    cursor: pointer;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--bg-primary);
+  font-weight: 800;
+  font-size: 0.88rem;
+}
+
+.showMoreButton:hover{
+  text-decoration: underline;
+}
+
+.iconsDiv{
+  width: 36px;
+  flex: 0 0 auto;
+}
+
+.iconsDiv ul{
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+
+.iconButton{
+  height: 32px;
+  width: 32px;
+  border-radius: 12px;
+  border: 1px solid rgba(22, 62, 72, 0.15);
+  background: rgba(22, 62, 72, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 140ms ease, background 140ms ease, border-color 140ms ease,
+    opacity 140ms ease;
+  padding: 0;
+}
+
+.iconButton:hover:not(:disabled){
+  transform: translateY(-1px);
+  background: rgba(22, 62, 72, 0.12);
+  border-color: rgba(22, 62, 72, 0.22);
+}
+
+.iconButton:disabled{
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.iconImg{
+  width: 15px;
+  height: 15px;
+}
+
+.iconLink{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  width: 32px;
+  border-radius: 12px;
+  border: 1px solid rgba(22, 62, 72, 0.15);
+  background: rgba(22, 62, 72, 0.06);
+  transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+  padding: 0;
+}
+
+.iconLink:hover{
+  transform: translateY(-1px);
+  background: rgba(22, 62, 72, 0.12);
+  border-color: rgba(22, 62, 72, 0.22);
 }
 
 

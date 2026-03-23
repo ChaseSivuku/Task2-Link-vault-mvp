@@ -26,15 +26,18 @@ export const LandingPage = ({ onNavigateToLogin, onNavigateToRegister }: Props) 
         </div>
         <div className={styles.features}>
           <div className={styles.feature}>
-            <h3>📚 Organize</h3>
+            <img className={styles.featureIcon} src="/icons/add-page.png" alt="Organize" />
+            <h3>Organize</h3>
             <p>Keep all your links in one place</p>
           </div>
           <div className={styles.feature}>
-            <h3>🏷️ Tag</h3>
+            <img className={styles.featureIcon} src="/icons/edit.png" alt="Tag" />
+            <h3>Tag</h3>
             <p>Use hashtags to categorize your links</p>
           </div>
           <div className={styles.feature}>
-            <h3>🔍 Search</h3>
+            <img className={styles.featureIcon} src="/icons/search.png" alt="Search" />
+            <h3>Search</h3>
             <p>Find your links quickly and easily</p>
           </div>
         </div>

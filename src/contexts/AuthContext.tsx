@@ -1,30 +1,5 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import type { ReactNode } from "react";
-
-export type User = {
-  id: string;
-  username: string;
-  email: string;
-  createdAt: string;
-};
-
-type AuthContextType = {
-  user: User | null;
-  login: (email: string, password: string) => boolean;
-  register: (username: string, email: string, password: string) => boolean;
-  logout: () => void;
-  isAuthenticated: boolean;
-};
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
-};
+import { useEffect, useState, type ReactNode } from "react";
+import { AuthContext, type User } from "./AuthContextData";
 
 type AuthProviderProps = {
   children: ReactNode;
@@ -33,7 +8,6 @@ type AuthProviderProps = {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
 
-  // Load user from localStorage on mount
   useEffect(() => {
     const savedUser = localStorage.getItem("currentUser");
     if (savedUser) {
@@ -65,31 +39,32 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     return false;
   };
 
-  const register = (username: string, email: string, password: string): boolean => {
+  const register = (
+    username: string,
+    email: string,
+    password: string
+  ): boolean => {
     const users = getUsersFromStorage();
-    
-    // Check if email already exists
+
     if (users.some((u) => u.email === email)) {
-      return false; // Email already registered
+      return false;
     }
 
-    // Check if username already exists
     if (users.some((u) => u.username === username)) {
-      return false; // Username already taken
+      return false;
     }
 
     const newUser = {
       id: Date.now().toString(),
       username,
       email,
-      password, // In production, this should be hashed
+      password,
       createdAt: new Date().toISOString(),
     };
 
     users.push(newUser);
     localStorage.setItem("users", JSON.stringify(users));
 
-    // Auto-login after registration
     const userData: User = {
       id: newUser.id,
       username: newUser.username,
@@ -121,7 +96,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   );
 };
 
-// Helper function to get users from localStorage
 function getUsersFromStorage(): Array<{
   id: string;
   username: string;

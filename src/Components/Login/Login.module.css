@@ -3,17 +3,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(45, 45, 45, 0.95) 0%,
+    rgba(65, 65, 65, 0.95) 100%
+  );
   padding: 20px;
 }
 
 .card {
-  background: white;
-  border-radius: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius-lg);
   padding: 50px 40px;
   max-width: 450px;
   width: 100%;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-md);
 }
 
 .logoContainer {
@@ -28,22 +34,22 @@
 
 .title {
   font-size: 2rem;
-  font-weight: bold;
-  color: #333;
+  font-weight: 800;
+  color: var(--text);
   margin-bottom: 10px;
   text-align: center;
 }
 
 .subtitle {
   font-size: 1rem;
-  color: #666;
+  color: var(--text-muted);
   margin-bottom: 30px;
   text-align: center;
 }
 
 .error {
-  background: #fee;
-  color: #c33;
+  background: rgba(244, 67, 54, 0.12);
+  color: rgb(210, 40, 30);
   padding: 12px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -65,39 +71,41 @@
 
 .inputGroup label {
   font-weight: 600;
-  color: #333;
+  color: var(--text);
   font-size: 0.9rem;
 }
 
 .inputGroup input {
   padding: 12px 15px;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
+  border: 1px solid rgba(15, 50, 58, 0.18);
+  border-radius: 12px;
   font-size: 1rem;
-  transition: border-color 0.3s;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .inputGroup input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: rgba(22, 62, 72, 0.55);
+  box-shadow: 0 0 0 4px rgba(22, 62, 72, 0.15);
 }
 
 .submitButton {
   padding: 14px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--bg-primary);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 140ms ease, box-shadow 140ms ease;
   margin-top: 10px;
 }
 
 .submitButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
 }
 
 .submitButton:active {
@@ -120,7 +128,7 @@
 .linkButton {
   background: none;
   border: none;
-  color: #667eea;
+  color: var(--bg-primary);
   cursor: pointer;
   font-weight: 600;
   text-decoration: underline;
@@ -129,7 +137,7 @@
 }
 
 .linkButton:hover {
-  color: #764ba2;
+  color: var(--bg-accent);
 }
 
 @media (max-width: 768px) {

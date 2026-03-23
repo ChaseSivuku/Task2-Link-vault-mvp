@@ -1,16 +1,45 @@
+:root{
+  --bg-primary: rgb(45, 45, 45);
+  --bg-accent: rgb(65, 65, 65);
+  --text: rgb(15, 50, 58);
+  --text-muted: rgba(15, 50, 58, 0.7);
+  --card-bg: rgba(255, 255, 255, 0.92);
+  --card-border: rgba(255, 255, 255, 0.55);
+  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 14px 40px rgba(0, 0, 0, 0.18);
+  --radius-lg: 18px;
+  --radius-md: 14px;
+}
+
+*{
+  box-sizing: border-box;
+}
+
 body{
   background-image: url('/background/background.png');
-  /* background-color: rgba(158, 220, 241, 0.46); */
+  background-color: var(--bg-primary);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
+  color: var(--text);
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-weight: 300;
   font-style: normal;
+
   margin: 0;
-  padding-inline: 116px;
-  padding-top: 30px;
-  height: 100vh;                  
-  /* width: 100vw;                    */
-  background-repeat: no-repeat; 
-  background-size: 100% 100%;     
-  background-position: center;
+  padding: 24px 16px;
+  min-height: 100vh;
+}
+
+button, input, textarea{
+  font-family: inherit;
+}
+
+hr{
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  margin: 18px 0;
 }

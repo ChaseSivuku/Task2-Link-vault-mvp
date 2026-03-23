@@ -27,6 +27,8 @@ export const LinkCard: React.FC<Props> = ({
   const displayDescription = isExpanded || !shouldTruncate 
     ? description 
     : `${description.substring(0, MAX_DESCRIPTION_LENGTH)}...`;
+  const editDisabled = !onEdit;
+  const deleteDisabled = !onDelete;
 
   return (
     <div className={styles.card}>
@@ -53,24 +55,30 @@ export const LinkCard: React.FC<Props> = ({
         <div className={styles.iconsDiv}>
           <ul>
             <li>
-              <img
-                src="/icons/edit.png"
-                alt="edit"
-                onClick={() => id && onEdit?.(id)} // ✅ call edit handler
-                style={{ cursor: onEdit ? "pointer" : "default" }}
-              />
+              <button
+                type="button"
+                className={styles.iconButton}
+                onClick={() => id && onEdit?.(id)}
+                disabled={editDisabled}
+                aria-label="Edit"
+              >
+                <img className={styles.iconImg} src="/icons/edit.png" alt="edit" />
+              </button>
             </li>
             <li>
-              <img
-                src="/icons/delete.png"
-                alt="delete"
-                onClick={() => id && onDelete?.(id)} // ✅ call delete handler
-                style={{ cursor: onDelete ? "pointer" : "default" }}
-              />
+              <button
+                type="button"
+                className={styles.iconButton}
+                onClick={() => id && onDelete?.(id)}
+                disabled={deleteDisabled}
+                aria-label="Delete"
+              >
+                <img className={styles.iconImg} src="/icons/delete.png" alt="delete" />
+              </button>
             </li>
             <li>
-              <a href={url} target="_blank" rel="noopener noreferrer">
-                <img src="/icons/visit.png" alt="visit" />
+              <a className={styles.iconLink} href={url} target="_blank" rel="noopener noreferrer" aria-label="Visit">
+                <img className={styles.iconImg} src="/icons/visit.png" alt="visit" />
               </a>
             </li>
           </ul>

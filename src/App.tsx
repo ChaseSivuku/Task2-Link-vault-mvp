@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import { AuthProvider } from "./contexts/AuthContext";
+import { useAuth } from "./contexts/useAuth";
 import { LandingPage } from "./Components/LandingPage/LandingPage";
 import { Login } from "./Components/Login/Login";
 import { Register } from "./Components/Register/Register";
@@ -12,12 +13,10 @@ function AppContent() {
   const { isAuthenticated } = useAuth();
   const [currentView, setCurrentView] = useState<View>("landing");
 
-  // If authenticated, show the app
   if (isAuthenticated) {
     return <LinkVault />;
   }
 
-  // Show appropriate view based on currentView state
   switch (currentView) {
     case "login":
       return (

@@ -20,14 +20,12 @@ export const AddLinkModal: React.FC<Props> = ({ onClose, onSave, initialData }) 
   const [description, setDescription] = useState(initialData?.description || "");
   const [url, setUrl] = useState(initialData?.url || "");
 
-  // Update form when initialData changes (for editing)
   useEffect(() => {
     if (initialData) {
       setTitle(initialData.title);
       setDescription(initialData.description);
       setUrl(initialData.url);
     } else {
-      // Reset form when adding new link
       setTitle("");
       setDescription("");
       setUrl("");
@@ -51,8 +49,6 @@ export const AddLinkModal: React.FC<Props> = ({ onClose, onSave, initialData }) 
     };
 
     onSave(linkData);
-    
-    // Reset form
     setTitle("");
     setDescription("");
     setUrl("");
@@ -84,9 +80,17 @@ export const AddLinkModal: React.FC<Props> = ({ onClose, onSave, initialData }) 
             onChange={(e) => setUrl(e.target.value)}
             required
           />
-          <div className={styles.actions}>
-            <button type="submit">Save</button>
-            <button type="button" onClick={onClose}>Cancel</button>
+          <div className={styles.buttons}>
+            <button type="submit" className={styles.saveBtn}>
+              Save
+            </button>
+            <button
+              type="button"
+              className={styles.cancelBtn}
+              onClick={onClose}
+            >
+              Cancel
+            </button>
           </div>
         </form>
       </div>

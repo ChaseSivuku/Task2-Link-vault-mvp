@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "../../contexts/useAuth";
 import { AddLinkModal } from "../AddLinkModal/AddLinkModal";
 import type { LinkData } from "../AddLinkModal/AddLinkModal";
 import { LinkCard } from "../LinkCard/LinkCard";
@@ -8,6 +8,7 @@ import { ActionButton } from "../ActionButton/ActionButton";
 import { Headingbar } from "../HeadingBar/Headingbar";
 import { NavBar } from "../NavBar/NavBar";
 import { Searchbar } from "../SearchBar/Searchbar";
+import styles from "./LinkVault.module.css";
 
 export const LinkVault = () => {
   const { user, logout } = useAuth();
@@ -21,7 +22,6 @@ export const LinkVault = () => {
   useEffect(() => {
     if (!user) return;
 
-    // Load user-specific links
     const userLinksKey = `links_${user.id}`;
     fetch(API_URL)
       .then((res) => {
@@ -29,14 +29,11 @@ export const LinkVault = () => {
         return res.json();
       })
       .then((data) => {
-        // Handle both array response and object with links property
         const linksArray = Array.isArray(data) ? data : (data.links || []);
-        // Filter links by user ID if they have userId property
         const userLinks = linksArray.filter((link: LinkData & { userId?: string }) => 
           !link.userId || link.userId === user.id
         );
         setLinks(userLinks);
-        // Also save to localStorage as backup
         localStorage.setItem(userLinksKey, JSON.stringify(userLinks));
       })
       .catch(() => {
@@ -83,7 +80,6 @@ export const LinkVault = () => {
       }
       setEditLink(null);
     } else {
-      // Adding new link
       try {
         const res = await fetch(API_URL, {
           method: "POST",
@@ -129,7 +125,6 @@ export const LinkVault = () => {
     }
   };
 
-  // Filter links based on search query
   const filteredLinks = links.filter((link) => {
     const query = searchQuery.toLowerCase();
     return (
@@ -146,23 +141,13 @@ export const LinkVault = () => {
     <>
       <NavBar
         child={
-          <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+          <div className={styles.navActions}>
             <UsernameButton username={user.username} url="/icons/account-circle.png" />
-            <button
+            <ActionButton
+              text="Logout"
+              iconURL="/icons/cancel.png"
               onClick={logout}
-              style={{
-                padding: "8px 16px",
-                background: "#f44336",
-                color: "white",
-                border: "none",
-                borderRadius: "6px",
-                cursor: "pointer",
-                fontSize: "0.9rem",
-                fontWeight: "600",
-              }}
-            >
-              Logout
-            </button>
+            />
           </div>
         }
       />
@@ -179,25 +164,27 @@ export const LinkVault = () => {
         child2={<Searchbar value={searchQuery} onChange={setSearchQuery} />}
       />
 
-      <hr />
+      <div className={styles.divider} />
 
       {filteredLinks.length === 0 ? (
-        <div style={{ textAlign: "center", padding: "40px", color: "#666" }}>
+        <div className={styles.emptyState}>
           <p>No links yet. Click "Add Link" to get started!</p>
         </div>
       ) : (
-        filteredLinks.map((link) => (
-          <LinkCard
-            key={link.id}
-            id={link.id}
-            title={link.title}
-            description={link.description}
-            hashtags={link.hashtags}
-            url={link.url}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-          />
-        ))
+        <div className={styles.cardsGrid}>
+          {filteredLinks.map((link) => (
+            <LinkCard
+              key={link.id}
+              id={link.id}
+              title={link.title}
+              description={link.description}
+              hashtags={link.hashtags}
+              url={link.url}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+            />
+          ))}
+        </div>
       )}
 
       {showModal && (
