@@ -1,69 +1,65 @@
-# React + TypeScript + Vite
+# Link Vault (MVP)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Link Vault is a small MVP web app for organizing and managing personal links.
 
-Currently, two official plugins are available:
+## What it includes
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Landing, sign up, and sign in screens
+- Session + user registration stored in `localStorage`
+- Link CRUD (create, read, update, delete)
+- Search/filter for links
+- Per-user local backup of fetched links (`links_<userId>`)
 
-## Expanding the ESLint configuration
+## Tech stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React (TypeScript + JSX)
+- Vite
+- CSS Modules
+- Local `localStorage` auth for the MVP
+- REST API integration for link data
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Expected link API
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+The frontend calls the following endpoints:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- `GET http://localhost:5000/links`
+- `POST http://localhost:5000/links`
+- `PUT http://localhost:5000/links/:id`
+- `DELETE http://localhost:5000/links/:id`
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The UI accepts the response from `GET /links` as either:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- an array of links, or
+- an object shaped like `{ links: [...] }`
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Getting started
+
+1. Install dependencies:
+   - `npm install`
+2. Start the frontend dev server:
+   - `npm run dev`
+3. Open the URL shown in the terminal.
+
+Notes:
+
+- Vite defaults to port `5173`. If it is already in use, it will switch to another port automatically.
+- Make sure you also have a backend running on `http://localhost:5000` that provides the `links` endpoints listed above.
+
+## Build and lint
+
+- Build:
+  - `npm run build`
+- Lint:
+  - `npm run lint`
+
+## Limitations (MVP)
+
+- Passwords are stored in plaintext in `localStorage` (MVP-only behavior).
+- The link API base URL is currently hard-coded to `http://localhost:5000/links` in the frontend.
+
+## Quick file map
+
+- `src/App.tsx`: top-level view routing (landing/login/register/app)
+- `src/contexts/AuthContext.tsx`: auth provider (MVP local auth)
+- `src/contexts/useAuth.ts`: hook for accessing auth state
+- `src/Components/LinkVault/LinkVault.tsx`: link list + CRUD integration
